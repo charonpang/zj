@@ -25,13 +25,6 @@ def search_text():
 
             # 提取和处理网页内容
             # 1.收集索引号、发布机构、发布日期、政策标题、政策正文文本、政策正文附件链接，以上六项信息
-            # 获取网页标题
-            # title = get_content.xpath("/html/body/div[2]/div[4]/div[3]/div[1]/table/tbody/tr[3]/td[2]/span/text()")
-            # index = get_content.xpath('/html/body/div[2]/div[4]/div[3]/div[1]/table/tbody/tr[1]/td[2]/span/text()')
-            # agency = get_content.xpath('/html/body/div[2]/div[4]/div[3]/div[1]/table/tbody/tr[2]/td[2]/span/text()')
-            # release_date = get_content.xpath('/html/body/div[2]/div[4]/div[3]/div[1]/table/tbody/tr[4]/td[4]/span/text()')
-            # policy_text = get_content.xpath('/html/body/div[2]/div[4]/div[3]/div[3]/div[2]/p/text()')
-            # att_link = get_content.xpath('/text()')
 
             title, release_date = get_content.xpath("//td[@class='td-value']/span/text()")[2:]
             index, agency = get_content.xpath("//td[@class='td-value-xl']/span/text()")[:2]
@@ -54,14 +47,6 @@ def search_data(start_date, end_date):
     # element = driver.find_elements_by_class_name("document-number").getText()
     # print(element)
     driver.implicitly_wait(10)
-
-    # html_source = driver.page_source
-    # # 重点
-    # htm = lxml.html.fromstring(html_source)
-    # # hrefs = htm.xpath('//*[@id="postList"]/table/tbody/tr/td/a/@href')
-    # hrefs = htm.xpath('//*[@id="postList"]/table/tbody/tr/td/a/text()')
-    # print(hrefs)
-    # 使用lxml
     page_text = driver.page_source
     tree = etree.HTML(page_text)
     # li_list = tree.xpath('//*[@id="postList"]/table/tbody/tr/td[2]/text()')
@@ -110,7 +95,3 @@ if __name__ == "__main__":
     start_date = '2023-01-01'
     end_date = '2023-06-01'
     result = search_data(start_date, end_date)
-    # if result:
-    #     for policy in result:
-    #         print(policy)
-    # search_text()
